@@ -1,5 +1,9 @@
 # pytorch_training_optimization_using_tensordict_memory_mapping
-Optimizing PyTorch Training using TensorDict Memory Mapping
+Optimizing PyTorch Training using TensorDict Memory Mapping.
+
+To run the demo: python run_demo.py
+
+[NOTE: a mock dataset will be created in the current working directory.]
 
 
 Training 1 Epoch via torch.utils.data.Dataset:
