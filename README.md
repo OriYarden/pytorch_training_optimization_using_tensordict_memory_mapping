@@ -1,0 +1,2 @@
+# pytorch_training_optimization_using_tensordict_memory_mapping
+Optimizing PyTorch Training using TensorDict Memory Mapping
