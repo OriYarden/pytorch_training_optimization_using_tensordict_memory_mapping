@@ -25,7 +25,7 @@ Training 1 Epoch via tensordict.TensorDict.MemoryMappedTensor(Dataset):
 
 TensorDict Memory Mapping boosts training speed.
 
-TensorDict Memory Mapping wrapper runtime is approximately equal to 1 epoch of torch.utils.data.Dataset:
+The initial wrapping runtime is approximately equal to 1 epoch of torch.utils.data.Dataset:
 
 ![demo_td_wrapper](https://github.com/user-attachments/assets/d56f0384-b9d0-4356-91aa-dc86808c0f33)
 
