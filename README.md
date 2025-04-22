@@ -9,6 +9,8 @@ tensordict==0.5.0
 
 To run the demo [NOTE: a mock dataset will be created in the current working directory]:
 ````
+git clone https://github.com/OriYarden/pytorch_training_optimization_using_tensordict_memory_mapping
+cd pytorch_training_optimization_using_tensordict_memory_mapping
 python run_demo.py
 ````
 
