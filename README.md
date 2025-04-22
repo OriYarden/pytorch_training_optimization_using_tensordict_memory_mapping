@@ -1,10 +1,16 @@
 # pytorch_training_optimization_using_tensordict_memory_mapping
 Optimizing PyTorch Training using TensorDict Memory Mapping to Nvidia GPU.
 
-To run the demo: python run_demo.py
+````
+python==3.9.13
+torch==2.3.1
+tensordict==0.5.0
+````
 
-[NOTE: a mock dataset will be created in the current working directory.]
-
+To run the demo [NOTE: a mock dataset will be created in the current working directory]:
+````
+python run_demo.py
+````
 
 Training 1 Epoch via torch.utils.data.Dataset:
 
