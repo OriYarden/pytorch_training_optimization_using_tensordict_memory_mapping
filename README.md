@@ -21,7 +21,7 @@ Training 1 Epoch via torch.utils.data.Dataset:
 ![demo_dataloader](https://github.com/user-attachments/assets/612806d8-3a8a-442c-8c2a-3ff2232d935b)
 
 
-Training 1 Epoch via tensordict.TensorDict.MemoryMappedTensor(Dataset):
+Training 1 Epoch via tensordict.TensorDict.MemoryMappedTensor(torch.utils.data.Dataset):
 
 ![demo_td_dataloader](https://github.com/user-attachments/assets/f580bd2f-3352-4ead-a7e4-35387e0d4f71)
 
