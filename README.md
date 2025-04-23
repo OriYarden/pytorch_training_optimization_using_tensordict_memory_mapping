@@ -3,13 +3,7 @@
 Optimizing PyTorch training by wrapping torch.utils.data.Dataset with tensordict.TensorDict.MemoryMappedTensor mapped, pinned,
 and loaded onto an Nvidia GPU and inputting TensorDict(Dataset) into torch.utils.data.DataLoader--to boost model training speed.
 
-````
-python==3.9.13
-torch==2.3.1
-tensordict==0.5.0
-````
-
-To run the demo [NOTE: a mock dataset will be created in the current working directory]:
+To run the demo:
 ````
 git clone https://github.com/OriYarden/pytorch_training_optimization_using_tensordict_memory_mapping
 cd pytorch_training_optimization_using_tensordict_memory_mapping
@@ -30,6 +24,8 @@ TensorDict Memory Mapping boosts training speed.
 The initial wrapping runtime is approximately equal to 1 epoch of torch.utils.data.Dataset:
 
 ![demo_td_wrapper](https://github.com/user-attachments/assets/d56f0384-b9d0-4356-91aa-dc86808c0f33)
+
+
 
 
 
