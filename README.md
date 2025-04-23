@@ -1,5 +1,7 @@
 # pytorch_training_optimization_using_tensordict_memory_mapping
-Optimizing PyTorch Training using TensorDict Memory Mapping to Nvidia GPU.
+
+Optimizing PyTorch training by wrapping torch.utils.data.Dataset with tensordict.TensorDict.MemoryMappedTensor mapped, pinned,
+and loaded onto an Nvidia GPU and inputting TensorDict(Dataset) into torch.utils.data.DataLoader--to boost model training speed.
 
 ````
 python==3.9.13
