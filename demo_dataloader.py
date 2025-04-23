@@ -68,10 +68,6 @@ class SomePyTorchDataset(Dataset):
 
     @staticmethod
     def get_transforms(image_size, use_tensordict):
-        # returns 3 transforms: norm, main, and to_tensor.
-        # norm: normalizes image and mask.
-        # main: resize (and rotate, flip, etc. if not use_tensordict) for image and mask.
-        # to_tensor: for image and mask.
         if use_tensordict:
             # when using tensordict memory mapping, probabilities should not be included in Dataset.
             # probability based transforms must be moved from Dataset into Collate_Fn.
