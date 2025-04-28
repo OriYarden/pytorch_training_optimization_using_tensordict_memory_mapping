@@ -16,6 +16,7 @@ class SomePyTorchDataset(Dataset):
             path_to_dataset_folder=None,
             use_tensordict=False,
     ):
+        super().__init__()
         self.batch_size = batch_size
         self.image_size = image_size
         # How the final dataset list that __getitem__ indexes is constructed does not matter.
