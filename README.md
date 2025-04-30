@@ -54,8 +54,8 @@ Still, PyTorch model training speed can be improved by orders of magnitude when 
 we should make the most out of the Nvidia GPU resources (i.e. memory) available so that we can speed up PyTorch model training time,
 reduce PyTorch model training cost, and shorten the gap between initially developing PyTorch models and having PyTorch models in production.
 
-
-
+And with the current AI boom, where LLMs and text-to-video PyTorch models require months of training, we can save time, resources, and
+Nvidia GPUs via ````tensordict_packages````'s ability to leverage ````TensorDict```` and ````MemoryMappedTensor````s with ````torch.utils.data.DataLoader````.
 
 
 
