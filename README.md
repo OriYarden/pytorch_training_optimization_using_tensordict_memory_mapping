@@ -42,6 +42,17 @@ tensordict.TensorDict.MemoryMappedTensor(torch.utils.data.Dataset) # Training 1 
 ![lamborghini-race-car](https://github.com/user-attachments/assets/d5e4d7f9-e69f-478c-ab29-9018e629b904)
 
 
+The only thing you have to change in your code (along with potentially a few other minor changes, see comments in code):
+
+````
+ds = dataset_to_tensordict(
+    ds=ds,
+    DEVICE=DEVICE,
+)
+````
+
+# Concluding Remarks:
+
 The TensorDict Memory Mapping tools that I've provided in ````tensordict_packages```` boosts PyTorch model training speed.
 
 However, the initial ````tensordict_packages```` wrapping runtime is approximately equal to 1 epoch of ````torch.utils.data.Dataset````:
