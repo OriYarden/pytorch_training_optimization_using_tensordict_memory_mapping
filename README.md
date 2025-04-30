@@ -45,10 +45,13 @@ tensordict.TensorDict.MemoryMappedTensor(torch.utils.data.Dataset) # Training 1 
 The only thing you have to change in your code (along with potentially a few other minor changes, see comments in code):
 
 ````
-ds = dataset_to_tensordict(
+ds = Dataset() # <--- potentially requires minor changes in __getitem__ method
+ds = dataset_to_tensordict( # <--- Wraps here, this must be added into your existing code.
     ds=ds,
     DEVICE=DEVICE,
 )
+loader = DataLoader() # <--- requires inputting Collate_Fn wrapper provided in tensordict_packages.
+# That's it! Just two lines of code.
 ````
 
 # Concluding Remarks:
