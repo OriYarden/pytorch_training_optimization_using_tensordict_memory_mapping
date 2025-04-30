@@ -50,7 +50,7 @@ ds = dataset_to_tensordict( # <--- Wraps here, this must be added into your exis
     ds=ds,
     DEVICE=DEVICE,
 )
-loader = DataLoader() # <--- requires inputting Collate_Fn wrapper (from tensordict_packages).
+loader = DataLoader(ds, collate_fn) # <--- requires inputting Collate_Fn wrapper (from tensordict_packages).
 # That's it! Just two lines of code.
 ````
 
