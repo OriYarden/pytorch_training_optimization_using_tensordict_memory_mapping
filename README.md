@@ -3,7 +3,7 @@
 Optimizing PyTorch training by wrapping ````torch.utils.data.Dataset```` with ````tensordict.TensorDict.MemoryMappedTensor```` mapped, pinned,
 and loaded onto an Nvidia GPU and inputting ````TensorDict(Dataset)```` into ````torch.utils.data.DataLoader````--to boost model training speed.
 
-## Boost PyTorch Model Training Speed:
+# Boost PyTorch Model Training Speed:
 ![subplots_demo](https://github.com/user-attachments/assets/203bbc6e-446e-442c-ac38-5b022352a35f)
 
 
@@ -14,20 +14,22 @@ cd pytorch_training_optimization_using_tensordict_memory_mapping
 python run_demo.py
 ````
 
-## Visualizing ````tensordict_packages```` Enwrapment:
+# Visualizing ````tensordict_packages```` Enwrapment:
 
 ![image](https://github.com/user-attachments/assets/4844201c-2a38-4468-abb0-4c3492e097a8)
 
 
-## Visualizing PyTorch TensorDict Memory Mapped Tensors Speed Advantage:
+# Visualizing PyTorch TensorDict Memory Mapped Tensors Speed Advantage:
 (and what ````run_demo.py```` looks like in gifs)
 
+### PyTorch Model Training BASELINE - Control Condition
 ````
 torch.utils.data.Dataset # Training 1 Epoch:
 ````
 
 ![demo_dataloader](https://github.com/user-attachments/assets/612806d8-3a8a-442c-8c2a-3ff2232d935b)
 
+### PyTorch Model Training TEST - Experimental Condition
 ````
 tensordict.TensorDict.MemoryMappedTensor(torch.utils.data.Dataset) # Training 1 Epoch:
 ````
