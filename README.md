@@ -44,10 +44,15 @@ tensordict.TensorDict.MemoryMappedTensor(torch.utils.data.Dataset) # Training 1 
 
 The TensorDict Memory Mapping tools that I've provided in ````tensordict_packages```` boosts PyTorch model training speed.
 
-The initial ````tensordict_packages```` wrapping runtime is approximately equal to 1 epoch of ````torch.utils.data.Dataset````:
+However, the initial ````tensordict_packages```` wrapping runtime is approximately equal to 1 epoch of ````torch.utils.data.Dataset````:
 
 ![demo_td_wrapper](https://github.com/user-attachments/assets/d56f0384-b9d0-4356-91aa-dc86808c0f33)
 
+So there may not be a scenario in which ````tensordict_packages```` can benefit PyTorch model inferencing alone.
+
+Still, PyTorch model training speed can be improved by orders of magnitude when using ````tensordict_packages````, and therefore,
+we should make the most out of the Nvidia GPU resources (i.e. memory) available so that we can speed up PyTorch model training time,
+reduce PyTorch model training cost, and shorten the gap between initially developing PyTorch models and having PyTorch models in production.
 
 
 
