@@ -11,7 +11,7 @@ def put_batch_on_device(batch, DEVICE='cpu'):
 
 
 def stack_batches_onto_model_device(batches_from_all_devices, DEVICE='cpu'):
-    # batches_from_all_devices: output(s) from (one or more) torch.utils.data.DataLoader(s).
+    # batches_from_all_devices: batches of (one or more) torch.utils.data.DataLoader(s).
     # DEVICE: gpu that has model gradients on it, this func puts batches_from_all_devices
     # on the same device as the model so that loss.backward() works.
     num_memmaps = len(batches_from_all_devices)
