@@ -21,7 +21,7 @@ And ````run_demo.py```` has minor changes; a list of ````torch.utils.data.DataLo
 
 This provides an avenue through which PyTorch models can be trained on larger datasets while still benefiting from memory mapped tensors, and the simple example I've shown in ````multi_gpus_multi_batches_version```` offers directions for which AI Python engineers can uncover new and better ways to innovate PyTorch model training like we did here with ````TensorDict.MemoryMappedTensor````s--maxing out Nvidia GPUs' resources to gain the speed advantage scaled at larger datasets.
 
-We should strive to make use of all of the Nvidia GPUs' resources available to us.
+We should make use of all of the Nvidia GPUs' resources that we have available to us.
 
 
 
