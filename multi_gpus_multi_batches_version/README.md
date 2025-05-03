@@ -14,8 +14,38 @@ cd pytorch_training_optimization_using_tensordict_memory_mapping/multi_gpus_mult
 python run_demo.py
 ````
 
-However, there are no differences in the ````tensordict_packages```` for ````multi_gpus_multi_batches_version```` except for two new tools in
-````tensordict_packages````'s ````utils_and_toolbox.py```` which allows in-parallel enumeration (````enumerate_loaders_in_parallel````) and stacking (````stack_batches_onto_model_device````) the resulting super batch, which comprises of batches from all memory mapped Nvidia GPUs (illustrated in the figure above).
+## Tools for Implementing tensordict_packages with Multiple GPUs:
+### Batching Multiple GPU Memory Mapped Tensors in Parallel:
+
+````
+def enumerate_loaders_in_parallel(loaders):
+    # loaders: [list] of torch.utils.data.DataLoader(s).
+    from tqdm import tqdm
+    return tqdm(enumerate(zip(*loaders)), total=len(loaders[0]))
+````
+### Stacking Multiple Batches of Tensors:
+````
+def stack_batches_onto_model_device(batches_from_all_devices, DEVICE='cpu'):
+    # batches_from_all_devices: batch(es) of one (or more) torch.utils.data.DataLoader(s).
+    # DEVICE: gpu that has model gradients on it, this func puts batches_from_all_devices
+    # on the same device as the model so that loss.backward() works.
+    num_memmaps = len(batches_from_all_devices)
+    num_items_in_a_memmap = len(batches_from_all_devices[-1])
+    return put_batch_on_device(
+        [
+            torch.concatenate(
+                [batches_from_all_devices[memmap_index][batch_item_index] for memmap_index in range(num_memmaps)],
+                dim=0,
+            ) for batch_item_index in range(num_items_in_a_memmap)
+        ],
+        DEVICE=DEVICE,
+    )
+````
+
+
+
+There are no differences in the ````tensordict_packages```` for ````multi_gpus_multi_batches_version```` except for two new tools in
+````tensordict_packages````'s ````utils_and_toolbox.py```` which allows in-parallel enumeration (````enumerate_loaders_in_parallel````) and stacking (````stack_batches_onto_model_device````) the resulting super batch, which comprises of batches from all memory mapped Nvidia GPUs.
 
 And ````run_demo.py```` has minor changes; a list of ````torch.utils.data.DataLoader````s, one for each Nvidia GPU, is memory mapped, and the in-parallel enumeration and stacking tools allow us to scale ````tensordict_packages````'s speed advantage linearly with GPUs.
 
