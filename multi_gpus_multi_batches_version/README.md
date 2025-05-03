@@ -4,7 +4,7 @@
 
 The batch dimension size of a ````super_batch```` is ````batch_size```` multiplied by the number of memory mapped Nvidia GPUs (e.g. ````len(torch.cuda.device_count()) - 1```` in ````run_demo.py````).
 
-NOTE: If using only one Nvidia GPU (e.g. ````MEMMAP_DEVICES = ['cuda:0']```` in ````run_demo.py````) then this version is equivalent to the base version of this repo which implements only a single Nvidia GPU for ````MemoryMappedTensor````s.
+NOTE: If using only one Nvidia GPU (e.g. ````MEMMAP_DEVICES = ['cuda:0']```` in ````run_demo.py````) then this version is equivalent to the base version of this repo which implements ````MemoryMappedTensor````s for only a single Nvidia GPU.
 
 
 To run the demo:
