@@ -26,7 +26,8 @@ transform = A.Compose(
 
 
 for use_tensordict, type_inputted_into_torch_DataLoader in enumerate(['torch.utils.data.Dataset <--- baseline', 'tensordict.TensorDict.MemoryMappedTensor <--- what the tensordict_packages wraps Dataset with']):
-    loaders = [
+    loaders = [ # in this example the same dataset is put on each gpu.
+        # in practice a very large dataset is chunked, one chunk per gpu.
         get_loader(
             batch_size=batch_size,
             image_size=image_size,
