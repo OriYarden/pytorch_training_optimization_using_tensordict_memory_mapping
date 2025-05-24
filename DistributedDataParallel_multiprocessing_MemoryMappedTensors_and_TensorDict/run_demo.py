@@ -91,7 +91,7 @@ if __name__ == '__main__':
         ]
 
         run_multiprocessing(
-            train_fn=train_fn,
+            main_process_fn=train_fn,
             Model=SomePyTorchModel,
             loaders=loaders,
             MEMMAP_DEVICES=MEMMAP_DEVICES,
