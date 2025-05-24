@@ -168,7 +168,7 @@ def cleanup():
     dist.destroy_process_group()
 
 
-def run_main(train_fn, Model, loaders, world_size, MEMMAP_DEVICES):
+def run_multiprocessing(train_fn, Model, loaders, world_size, MEMMAP_DEVICES):
     print('\nSPAWNING PROCESSES\n')
     mp.spawn(train_fn,
              args=(world_size, Model, loaders, MEMMAP_DEVICES,),
