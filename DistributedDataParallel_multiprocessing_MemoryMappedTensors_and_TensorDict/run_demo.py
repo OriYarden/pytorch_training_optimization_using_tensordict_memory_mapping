@@ -42,6 +42,13 @@ if __name__ == '__main__':
     # Here we use torch multiprocessing, torch.distributed, DistributedDataParallel, MemoryMappedTensors, and TensorDict--all at once.
     # each process runs on a GPU, each GPU gets a model replica and memory map of Dataset, all processes spawn in parallel.
 
+    # >>> NOTE: force_number_of_chunks is set here so we can directly compare
+    # [multiprocessing + torch.distributed + DDP]  VERSUS  [multiprocessing + torch.distributed + DDP + MemoryMappedTensors + TensorDict]
+    # However, in practice one would not specify the force_number_of_chunks arg unless the
+    # number of GPUs and the size of the dataset is very large as that would be incredibly time consuming and the size of
+    # the Dataset and gigabytes of memory per GPU and the largest chunk size and number of chunks should be calculated beforehand.
+
+
     force_number_of_chunks = 2 # number of chunks = number of GPUs used = number of memory maps = number of processes running in parallel.
     batch_size = 8
     image_size = 256
