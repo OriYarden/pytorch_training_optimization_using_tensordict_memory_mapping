@@ -7,10 +7,10 @@ import inspect
 import os
 
 
-def put_batch_on_device(batch, DEVICE='cpu'):
+def put_batch_on_device(batch, DEVICE='cpu', non_blocking=False):
     # batch: [tuple] of Tensors.
     return [
-        b.to(device=DEVICE) for b in batch
+        b.to(device=DEVICE, non_blocking=non_blocking) for b in batch
     ]
 
 
