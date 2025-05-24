@@ -158,6 +158,9 @@ def chunk_Dataset_to_fit_memmaps_onto_gpus(DS, MEMMAP_DEVICES=['cuda:0'], use_te
 
 
 def setup(rank, world_size, backend='nccl', master_addr='localhost', master_port='12355'):
+    # rank: [int] or cuda device index, used for indexing the paralleled process, device_index, MEMMAP_DEVICES,
+    # loaders, and DDP model replicas spawned by the torch.multiprocessing.spawn call.
+    # world_size = len(loaders).
     os.environ['MASTER_ADDR'] = master_addr
     os.environ['MASTER_PORT'] = master_port
     # initialize the process group
@@ -168,9 +171,9 @@ def cleanup():
     dist.destroy_process_group()
 
 
-def run_multiprocessing(train_fn, Model, loaders, world_size, MEMMAP_DEVICES):
+def run_multiprocessing(train_fn, Model, loaders, MEMMAP_DEVICES):
     print('\nSPAWNING PROCESSES\n')
     mp.spawn(train_fn,
-             args=(world_size, Model, loaders, MEMMAP_DEVICES,),
-             nprocs=world_size,
+             args=(Model, loaders, MEMMAP_DEVICES,),
+             nprocs=len(loaders), # world_size
              join=True)
