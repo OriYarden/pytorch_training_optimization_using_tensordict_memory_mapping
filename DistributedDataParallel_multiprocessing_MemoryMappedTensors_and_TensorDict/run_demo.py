@@ -6,7 +6,7 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 from demo_dataloader import SomePyTorchDataset, get_loader
 from demo_model import SomePyTorchModel
 from tensordict_packages.collate_wrapper import Collate_Fn
-from tensordict_packages.utils_and_toolbox import put_batch_on_device, setup, cleanup, run_main, ChunkedDatasetWrapper, chunk_Dataset_to_fit_memmaps_onto_gpus
+from tensordict_packages.utils_and_toolbox import put_batch_on_device, setup, cleanup, run_multiprocessing, ChunkedDatasetWrapper, chunk_Dataset_to_fit_memmaps_onto_gpus
 from tqdm import tqdm
 
 
@@ -90,7 +90,7 @@ if __name__ == '__main__':
             ) for i in range(len(ds_as_list_of_chunks))
         ]
 
-        run_main(
+        run_multiprocessing(
             train_fn=train_fn,
             Model=SomePyTorchModel,
             loaders=loaders,
