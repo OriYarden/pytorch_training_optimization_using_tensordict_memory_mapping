@@ -4,7 +4,7 @@ import albumentations as A
 from albumentations.pytorch import ToTensorV2
 from torch.nn.parallel import DistributedDataParallel as DDP
 from demo_dataloader import SomePyTorchDataset
-from demo_model import SomePyTorchModel as Model
+from demo_model import SomePyTorchModel
 from tensordict_packages.collate_wrapper import Collate_Fn
 from tensordict_packages.utils_and_toolbox import put_batch_on_device, setup, cleanup, run_main, ChunkedDatasetWrapper, chunk_Dataset_to_fit_memmaps_onto_gpus
 from tqdm import tqdm
