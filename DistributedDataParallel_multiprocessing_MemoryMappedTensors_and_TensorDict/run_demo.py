@@ -10,9 +10,9 @@ from tensordict_packages.utils_and_toolbox import put_batch_on_device, setup, cl
 from tqdm import tqdm
 
 
-def train_fn(rank, world_size, Model, loaders, MEMMAP_DEVICES, num_epochs=2):
+def train_fn(rank, Model, loaders, MEMMAP_DEVICES, num_epochs=2):
     print(f"Running basic DDP example on rank {rank}.")
-    setup(rank, world_size)
+    setup(rank, world_size=len(loaders))
 
     # create model and move it to GPU with id rank
     orig_model = Model().to(device=MEMMAP_DEVICES[rank])
@@ -95,6 +95,5 @@ if __name__ == '__main__':
             Model=SomePyTorchModel,
             loaders=loaders,
             MEMMAP_DEVICES=MEMMAP_DEVICES,
-            world_size=len(loaders),
         )
 
