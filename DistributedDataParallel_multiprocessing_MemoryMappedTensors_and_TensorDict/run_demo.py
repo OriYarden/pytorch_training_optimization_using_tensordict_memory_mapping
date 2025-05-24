@@ -3,7 +3,7 @@ from torch import nn
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
 from torch.nn.parallel import DistributedDataParallel as DDP
-from demo_dataloader import SomePyTorchDataset
+from demo_dataloader import SomePyTorchDataset, get_loader
 from demo_model import SomePyTorchModel
 from tensordict_packages.collate_wrapper import Collate_Fn
 from tensordict_packages.utils_and_toolbox import put_batch_on_device, setup, cleanup, run_main, ChunkedDatasetWrapper, chunk_Dataset_to_fit_memmaps_onto_gpus
@@ -79,7 +79,6 @@ if __name__ == '__main__':
             get_loader(
                 ds=ds_as_list_of_chunks[i],
                 batch_size=batch_size,
-                # DEVICE=MEMMAP_DEVICES[i],
                 use_tensordict=use_tensordict,
                 #collate_fn=None, <--- can be None if not use_tensordict.
                 collate_fn=Collate_Fn(
