@@ -171,9 +171,9 @@ def cleanup():
     dist.destroy_process_group()
 
 
-def run_multiprocessing(train_fn, Model, loaders, MEMMAP_DEVICES):
-    print('\nSPAWNING PROCESSES\n')
-    mp.spawn(train_fn,
+def run_multiprocessing(main_process_fn, Model, loaders, MEMMAP_DEVICES):
+    print(f'\nSPAWNING {len(loaders)} PROCESSES\n')
+    mp.spawn(main_process_fn,
              args=(Model, loaders, MEMMAP_DEVICES,),
              nprocs=len(loaders), # world_size
              join=True)
