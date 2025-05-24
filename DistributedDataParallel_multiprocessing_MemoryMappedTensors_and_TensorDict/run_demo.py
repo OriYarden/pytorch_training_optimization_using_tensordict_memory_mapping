@@ -25,6 +25,8 @@ def train_fn(rank, Model, loaders, MEMMAP_DEVICES, num_epochs=2):
     for epoch in range(num_epochs):
         print(f'[EPOCH {epoch + 1} of {num_epochs}]')
         for i, batch in tqdm(enumerate(loaders[rank]), total=len(loaders[rank])):
+            # non_blocking must be True for the batch of Tensors because parallel processes will
+            # hang if loaders are not all the same __len__(). Otherwise it shouldn't matter.
             image, mask, mask_2d, some_binary_label, some_multi_labels = put_batch_on_device(batch, DEVICE=MEMMAP_DEVICES[rank], non_blocking=True)
             optimizer.zero_grad()
             prediction = model(image)
