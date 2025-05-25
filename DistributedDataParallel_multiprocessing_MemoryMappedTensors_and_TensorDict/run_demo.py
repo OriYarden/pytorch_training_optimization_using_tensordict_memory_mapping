@@ -67,8 +67,8 @@ if __name__ == '__main__':
         #additional_targets={'image': 'image', 'mask': 'mask'} # can leave as commented out since Collate_Fn handles this.
     )
 
-    for use_tensordict, print_statement in enumerate(['multiprocessing + torch.distributed + DDP', 'multiprocessing + torch.distributed + DDP + MemoryMappedTensors + TensorDict']):
-        print(print_statement)
+    for use_tensordict, print_combo_of_modules_in_use in enumerate(['multiprocessing + torch.distributed + DDP', 'multiprocessing + torch.distributed + DDP + MemoryMappedTensors + TensorDict']):
+        print('\n' + print_combo_of_modules_in_use + '\n')
         # split torch.utils.data.Dataset into separate chunks (i.e. subsets).
         # to max out training speed, use the largest possible chunk size that can fit onto GPU(s).
         # e.g. if memmaps and model can fit on 2 GPUs then using 4 GPUs will be slower.
