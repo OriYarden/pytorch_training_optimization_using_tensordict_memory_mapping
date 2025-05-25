@@ -157,7 +157,7 @@ def chunk_Dataset_to_fit_memmaps_onto_gpus(DS, MEMMAP_DEVICES=['cuda:0'], use_te
     return ds_as_list_of_chunks
 
 
-def setup(rank, world_size, backend='nccl', master_addr='localhost', master_port='12355'):
+def distributed_setup(rank, world_size, backend='nccl', master_addr='localhost', master_port='12355'):
     # rank: [int] or cuda device index, used for indexing the paralleled process, device_index, MEMMAP_DEVICES,
     # loaders, and DDP model replicas spawned by the torch.multiprocessing.spawn call.
     # world_size = len(loaders).
@@ -167,7 +167,7 @@ def setup(rank, world_size, backend='nccl', master_addr='localhost', master_port
     dist.init_process_group(backend=backend, rank=rank, world_size=world_size)
 
 
-def cleanup():
+def distributed_cleanup():
     dist.destroy_process_group()
 
 
