@@ -6,13 +6,13 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 from demo_dataloader import SomePyTorchDataset, get_loader
 from demo_model import SomePyTorchModel
 from tensordict_packages.collate_wrapper import Collate_Fn
-from tensordict_packages.utils_and_toolbox import put_batch_on_device, setup, cleanup, run_multiprocessing, chunk_Dataset_to_fit_memmaps_onto_gpus
+from tensordict_packages.utils_and_toolbox import put_batch_on_device, distributed_setup, distributed_cleanup, run_multiprocessing, chunk_Dataset_to_fit_memmaps_onto_gpus
 from tqdm import tqdm
 
 
 def train_fn(rank, Model, loaders, MEMMAP_DEVICES, num_epochs=2):
-    print(f"Running basic DDP example on rank {rank}.")
-    setup(rank, world_size=len(loaders))
+    print(f'Running basic DDP example on rank (process) {rank} on GPU {rank} (cuda:{rank})' + ['.', f' using tensordict memory map {rank}.'][use_tensordict])
+    distributed_setup(rank, world_size=len(loaders))
 
     # create model and move it to GPU with id rank
     orig_model = Model().to(device=MEMMAP_DEVICES[rank])
@@ -34,8 +34,8 @@ def train_fn(rank, Model, loaders, MEMMAP_DEVICES, num_epochs=2):
             loss.backward()
             optimizer.step()
 
-    cleanup()
-    print(f"Finished running basic DDP example on rank {rank}.")
+    distributed_cleanup()
+    print(f'Finished running basic DDP example on rank (process) {rank} on GPU {rank} (cuda:{rank})' + ['.', f' using tensordict memory map {rank}.'][use_tensordict])
 
 
 if __name__ == '__main__':
@@ -44,7 +44,7 @@ if __name__ == '__main__':
 
     # >>> NOTE: force_number_of_chunks is set here so we can directly compare
     # [multiprocessing + torch.distributed + DDP]  VERSUS  [multiprocessing + torch.distributed + DDP + MemoryMappedTensors + TensorDict]
-    # However, in practice one would not specify the force_number_of_chunks arg unless the
+    # However, in practice one would not specify the force_number_of_chunks arg (as func can determine number of chunks) unless the
     # number of GPUs and the size of the dataset is very large as that would be incredibly time consuming and the size of
     # the Dataset and gigabytes of memory per GPU and the largest chunk size and number of chunks should be calculated beforehand.
 
@@ -102,7 +102,7 @@ if __name__ == '__main__':
         run_multiprocessing(
             main_process_fn=train_fn,
             Model=SomePyTorchModel,
-            loaders=loaders,
+            loaders=loaders, # len(loaders) = world_size
             MEMMAP_DEVICES=MEMMAP_DEVICES,
         )
 
