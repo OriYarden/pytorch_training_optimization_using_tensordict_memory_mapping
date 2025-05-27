@@ -171,9 +171,9 @@ def distributed_cleanup():
     dist.destroy_process_group()
 
 
-def run_multiprocessing(main_process_fn, Model, loaders, MEMMAP_DEVICES):
+def run_multiprocessing(main_process_fn, Model, loaders, MEMMAP_DEVICES, use_tensordict):
     print(f'\nSPAWNING {len(loaders)} PROCESSES\n')
     mp.spawn(main_process_fn,
-             args=(Model, loaders, MEMMAP_DEVICES,),
+             args=(Model, loaders, MEMMAP_DEVICES, use_tensordict,),
              nprocs=len(loaders), # world_size
              join=True)
