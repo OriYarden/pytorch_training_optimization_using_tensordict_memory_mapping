@@ -55,7 +55,8 @@ def dataset_to_tensordict(ds, DEVICE='cpu', list_of_dtypes=None, force_list_of_t
     print('=>    [ PINNING ]   ' + ' '*len(str(len(ds))) + '|')
     ds_as_a_tensordict.memmap_() # pins memory map here.
     print('=>    [ LOADING ]   ' + ' '*len(str(len(ds))) + '|')
-    for i, dataset_items in enumerate(ds): # loads onto (mapping) device.
+    from tqdm import tqdm
+    for i, dataset_items in tqdm(enumerate(ds)): # loads onto (mapping) device.
         ds_as_a_tensordict[i] = TensorDict({
             list_of_tensordict_keys[key_index]: dataset_items[key_index] for key_index in range(len(list_of_tensordict_keys))
         }, batch_size=[])
