@@ -11,7 +11,7 @@ from tqdm import tqdm
 
 
 def train_fn(rank, Model, loaders, MEMMAP_DEVICES, use_tensordict, num_epochs=2):
-    print(f'Running basic DDP example on rank (process) {rank} on GPU {rank} (cuda:{rank})' + ['.', f' using tensordict memory map {rank}.'][use_tensordict])
+    print(f'Running basic DDP example on rank (process) {rank} on GPU {MEMMAP_DEVICES[rank]}' + ['.', f' using tensordict memory map pinned to {MEMMAP_DEVICES[rank]}.'][use_tensordict])
     distributed_setup(rank, world_size=len(loaders))
 
     # create model and move it to GPU with id rank
@@ -35,7 +35,7 @@ def train_fn(rank, Model, loaders, MEMMAP_DEVICES, use_tensordict, num_epochs=2)
             optimizer.step()
 
     distributed_cleanup()
-    print(f'Finished running basic DDP example on rank (process) {rank} on GPU {rank} (cuda:{rank})' + ['.', f' using tensordict memory map {rank}.'][use_tensordict])
+    print(f'Finished running basic DDP example on rank (process) {rank} on GPU {MEMMAP_DEVICES[rank]}' + ['.', f' using tensordict memory map pinned to {MEMMAP_DEVICES[rank]}.'][use_tensordict])
 
 
 if __name__ == '__main__':
