@@ -10,7 +10,7 @@ from tensordict_packages.utils_and_toolbox import put_batch_on_device, distribut
 from tqdm import tqdm
 
 
-def train_fn(rank, Model, loaders, MEMMAP_DEVICES, num_epochs=2):
+def train_fn(rank, Model, loaders, MEMMAP_DEVICES, use_tensordict, num_epochs=2):
     print(f'Running basic DDP example on rank (process) {rank} on GPU {rank} (cuda:{rank})' + ['.', f' using tensordict memory map {rank}.'][use_tensordict])
     distributed_setup(rank, world_size=len(loaders))
 
@@ -104,5 +104,6 @@ if __name__ == '__main__':
             Model=SomePyTorchModel,
             loaders=loaders, # len(loaders) = world_size
             MEMMAP_DEVICES=MEMMAP_DEVICES,
+            use_tensordict=use_tensordict,
         )
 
